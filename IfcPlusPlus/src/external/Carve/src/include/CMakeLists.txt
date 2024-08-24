@@ -1,0 +1,9 @@
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+install(DIRECTORY carve
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
+        FILES_MATCHING
+          PATTERN "*.hpp"
+          PATTERN "internal" EXCLUDE
+)
