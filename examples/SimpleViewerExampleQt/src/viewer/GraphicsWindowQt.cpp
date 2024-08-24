@@ -286,7 +286,9 @@ void QtOSGWidget::mousePressEvent( QMouseEvent* event )
 	default: button = 0; break;
 	}
 	setKeyboardModifiers( event );
-	m_graphics_window->getEventQueue()->mouseButtonPress( event->x()*m_device_pixel_ratio, event->y()*m_device_pixel_ratio, button );
+
+	QPointF pos = event-> position(); // Get the position of the mouse event
+	m_graphics_window->getEventQueue()->mouseButtonPress(pos.x() * m_device_pixel_ratio, pos.y()*m_device_pixel_ratio, button );
 }
 
 void QtOSGWidget::mouseReleaseEvent( QMouseEvent* event )
@@ -301,7 +303,9 @@ void QtOSGWidget::mouseReleaseEvent( QMouseEvent* event )
 	default: button = 0; break;
 	}
 	setKeyboardModifiers( event );
-	m_graphics_window->getEventQueue()->mouseButtonRelease( event->x()*m_device_pixel_ratio, event->y()*m_device_pixel_ratio, button );
+	
+	QPointF pos = event->position();
+	m_graphics_window->getEventQueue()->mouseButtonRelease( pos.x()*m_device_pixel_ratio, pos.y()*m_device_pixel_ratio, button );
 }
 
 
@@ -318,14 +322,18 @@ void QtOSGWidget::mouseDoubleClickEvent( QMouseEvent* event )
 	default: button = 0; break;
 	}
 	setKeyboardModifiers( event );
-	m_graphics_window->getEventQueue()->mouseDoubleButtonPress( event->x()*m_device_pixel_ratio, event->y()*m_device_pixel_ratio, button );
+
+	QPointF pos = event->position();
+	m_graphics_window->getEventQueue()->mouseDoubleButtonPress( pos.x()*m_device_pixel_ratio, pos.y()*m_device_pixel_ratio, button );
 }
 
 void QtOSGWidget::mouseMoveEvent( QMouseEvent* event )
 {
 	setKeyboardModifiers( event );
-	double x = event->x() * m_device_pixel_ratio;
-	double y = event->y() * m_device_pixel_ratio;
+
+	QPointF pos = event->position(); // Get the position of the mouse event
+	double x = pos.x() * m_device_pixel_ratio;
+	double y = pos.y() * m_device_pixel_ratio;
 	osgGA::EventQueue* eventQueue = m_graphics_window->getEventQueue();
 	eventQueue->mouseMotion( x, y );
 }
