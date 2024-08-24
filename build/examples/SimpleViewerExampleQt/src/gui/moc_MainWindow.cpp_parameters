@@ -1,7 +1,0 @@
--DQT_NO_KEYWORDS
--DUNICODE
--D_UNICODE
--DIFCQUERY_STATIC_LIB
--o
-/home/sw06045/Documents/ifcplusplus/ifcplusplus/build/examples/SimpleViewerExampleQt/src/gui/moc_MainWindow.cpp
-/home/sw06045/Documents/ifcplusplus/ifcplusplus/examples/SimpleViewerExampleQt/src/gui/MainWindow.h
