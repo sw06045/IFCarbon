@@ -34,10 +34,18 @@
 namespace carve {
 namespace line {
 
-struct polyline_vertex_iter
-    : public std::iterator<std::random_access_iterator_tag, Vertex*> {
+struct polyline_vertex_iter{
+//    : public std::iterator<std::random_access_iterator_tag, Vertex*> {
   Polyline* base;
   ssize_t idx;
+  
+  
+  // Define iterator traits directly
+  using iterator_category = std::random_access_iterator_tag;
+  using value_type = Vertex*;
+  using difference_type = ssize_t;
+  using pointer = Vertex*;
+  using reference = Vertex*&;
 
   polyline_vertex_iter(Polyline* _base) : base(_base), idx(0) {}
 
@@ -104,10 +112,19 @@ static inline bool operator>=(const polyline_vertex_iter& a,
   return a.idx >= b.idx;
 }
 
-struct polyline_vertex_const_iter
-    : public std::iterator<std::random_access_iterator_tag, Vertex*> {
+struct polyline_vertex_const_iter {
+//    : public std::iterator<std::random_access_iterator_tag, Vertex*> {
   const Polyline* base;
   ssize_t idx;
+
+
+
+  // Define iterator traits directly
+  using iterator_category = std::random_access_iterator_tag;
+  using value_type = Vertex*;
+  using difference_type = ssize_t;
+  using pointer = Vertex*;
+  using reference = Vertex*&;
 
   polyline_vertex_const_iter(const Polyline* _base) : base(_base), idx(0) {}
 
@@ -187,10 +204,17 @@ inline polyline_vertex_iter Polyline::vend() {
   return polyline_vertex_iter(this, (ssize_t)vertexCount());
 }
 
-struct polyline_edge_iter
-    : public std::iterator<std::random_access_iterator_tag, PolylineEdge*> {
+struct polyline_edge_iter {
+//    : public std::iterator<std::random_access_iterator_tag, PolylineEdge*> {
   Polyline* base;
   ssize_t idx;
+
+  // Define iterator traits directly
+  using iterator_category = std::random_access_iterator_tag;
+  using value_type = PolylineEdge*;
+  using difference_type = ssize_t;
+  using pointer = PolylineEdge*;
+  using reference = PolylineEdge*&;
 
   polyline_edge_iter(Polyline* _base) : base(_base), idx(0) {}
 
@@ -252,10 +276,18 @@ static inline bool operator>=(const polyline_edge_iter& a,
   return a.idx >= b.idx;
 }
 
-struct polyline_edge_const_iter
-    : public std::iterator<std::random_access_iterator_tag, PolylineEdge*> {
+struct polyline_edge_const_iter {
+//    : public std::iterator<std::random_access_iterator_tag, PolylineEdge*> {
   const Polyline* base;
   ssize_t idx;
+
+
+  // Define iterator traits directly
+  using iterator_category = std::random_access_iterator_tag;
+  using value_type = PolylineEdge*;
+  using difference_type = ssize_t;
+  using pointer = PolylineEdge*;
+  using reference = PolylineEdge*&;
 
   polyline_edge_const_iter(const Polyline* _base) : base(_base), idx(0) {}
 
