@@ -27,12 +27,19 @@
 namespace carve {
 
 template <typename set_t>
-class set_insert_iterator
-    : public std::iterator<std::output_iterator_tag, void, void, void, void> {
+class set_insert_iterator {
+//    : public std::iterator<std::output_iterator_tag, void, void, void, void> {
  protected:
   set_t* set;
 
  public:
+  // Define iterator traits directly
+  using iterator_category = std::output_iterator_tag;
+  using value_type = void;
+  using difference_type = void;
+  using pointer = void;
+  using reference = void;
+
   set_insert_iterator(set_t& s) : set(&s) {}
 
   set_insert_iterator& operator=(typename set_t::const_reference value) {
