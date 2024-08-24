@@ -51,3 +51,6 @@ examples/LoadFileExample/.vs/LoadFileExample/v17/DocumentLayout.json
 examples/SimpleViewerExampleQt2/
 
 .vscode/
+*.ifc
+*.cmd
+*.sh
