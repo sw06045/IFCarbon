@@ -10,6 +10,7 @@
 #include <ifcpp/model/BuildingModel.h>
 #include <ifcpp/reader/ReaderSTEP.h>
 #include <ifcpp/geometry/GeometryConverter.h>
+#include <ifcpp/geometry/MeshOps.h>
 
 using namespace IFC4X3;
 
