@@ -233,10 +233,25 @@ void resolveShapeData(shared_ptr<ProductShapeData>& shapeData)
 int main()
 {
 	// 1: create an IFC model and a reader for IFC files in STEP format:
+	//std::shared_ptr<BuildingModel>: 
+		//Declares a smart pointer to manage a BuildingModel object.
+	// ifc_model(new BuildingModel()):
+		//Creates a BuildingModel instance on the heap using new
+		//and initializes the shared pointer with it.
 	shared_ptr<BuildingModel> ifc_model(new BuildingModel());
+	// MessageHandler mh;
+		//creates an instance of MessageHandler on the stack.
 	MessageHandler mh;
 
+
+	
 	shared_ptr<ReaderSTEP> step_reader(new ReaderSTEP());
+	// -> is a short cut to dererencing the pointer and accessing the member
+	// as step_reader is a shared_ptr, need to dereference such as (*step_reader).setMessageCallBack(...)
+
+	// std::bind to create callable object that binds mh instance to slotMessageWrapper method
+	// use &mh as we want to refer to use the address-of operator which returns the memory address of variable
+	// std::placeholders::_1 used as placeholder for arguments
 	step_reader->setMessageCallBack(std::bind(&MessageHandler::slotMessageWrapper, &mh, std::placeholders::_1));
 	
 	// 2: load the model:
@@ -262,9 +277,14 @@ int main()
 	geometry_converter->convertGeometry();
 
 	// 3: get a flat map of all loaded IFC entities with geometry:
+	// std::unordered_map<std::string, shared_ptr<ProductShapeData>>: stores key-value pairs
+	// & here means that map_entities is a reference
+	// to original returned by geometry_converter->getShapeInputData() (for efficiency)
 	const std::unordered_map<std::string, shared_ptr<ProductShapeData> >& map_entities = geometry_converter->getShapeInputData();
+	
 	shared_ptr<ProductShapeData> shapeDataIfcProject;
 
+	// loop iterates over a map where it holds each key-value pair (a std::pair)
 	for (auto it : map_entities)
 	{
 		shared_ptr<ProductShapeData> shapeData = it.second;
@@ -277,6 +297,11 @@ int main()
 		shared_ptr<IfcObjectDefinition> ifcObject = shared_ptr<IfcObjectDefinition>(shapeData->m_ifc_object_definition);
 
 		// check for certain type of the entity:
+		// runtime type check. It checks if the object held by ifcObject 
+		//is actually of type IfcProject (or a class derived from IfcProject). 
+		//If it is, the cast is successful, and ifc_project will hold a 
+		//valid shared_ptr<IfcProject>. 
+		//If not, ifc_project will be set to nullptr
 		shared_ptr<IfcProject> ifc_project = dynamic_pointer_cast<IfcProject>(ifcObject);
 		if (ifc_project)
 		{

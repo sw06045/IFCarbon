@@ -22,6 +22,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
 #include "ifcpp/model/BuildingModel.h"
 #include "ifcpp/model/StatusCallback.h"
 
+// declares a class ReaderSTEP that is inheriting from StatusCallback
+// public indicates that the inheritance is public. This means that the public and protected members of StatusCallback will retain their access level when inherited by ReaderSTEP
+// IFCQUERY_EXPORT: This macro is used to ensure that ReaderSTEP is exported so other code outside of the current module or application can use it.
 class IFCQUERY_EXPORT ReaderSTEP : public StatusCallback
 {
 public:
