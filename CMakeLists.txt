@@ -21,7 +21,7 @@ option(BUILD_CONSOLE_APPLICATION "Build an example CLI application" ON)
 if (WIN32)
 	option(BUILD_VIEWER_APPLICATION "Build the viewer example application" ON)
 else(NOT WIN32)
-	option(BUILD_VIEWER_APPLICATION "Build the viewer example application" ON)
+	option(BUILD_VIEWER_APPLICATION "Build the viewer example application" OFF)
 endif()
 option(USE_OSG_DEBUG "Use openscenegraph debug library" OFF)
 

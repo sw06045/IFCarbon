@@ -161,6 +161,10 @@ void resolveGeometricItems(shared_ptr<ItemShapeData>& geometricItem, carve::math
 	// closed meshes
 	for (auto meshset : geometricItem->m_meshsets)
 	{
+
+		double volume = MeshOps::computeMeshsetVolume(meshset.get());  // Use mesh.get() to get raw pointer
+		std::cout << "Volume: " << volume << std::endl;
+
 		std::vector<carve::mesh::Vertex<3> >& vertexData = meshset->vertex_storage;
 		for (auto mesh : meshset->meshes)
 		{
@@ -184,6 +188,10 @@ void resolveGeometricItems(shared_ptr<ItemShapeData>& geometricItem, carve::math
 	// open meshes
 	for (auto meshset : geometricItem->m_meshsets_open)
 	{
+
+		double volume = MeshOps::computeMeshsetVolume(meshset.get());  // Use mesh.get() to get raw pointer
+		std::cout << "Volume: " << volume << std::endl;
+		
 		std::vector<carve::mesh::Vertex<3> >& vertexData = meshset->vertex_storage;
 		for (auto mesh : meshset->meshes)
 		{
